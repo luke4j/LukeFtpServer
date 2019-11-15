@@ -26,7 +26,7 @@ public class LukeFtpServer {
 
     String homePath = "c:/" ;
 
-    private void setParams(String[] args){
+    private Boolean  setParams(String[] args){
         System.out.println("args is "+args);
         for(int i = 0 ;i<args.length ;i++){
             if("-u".equals(args[i])){
@@ -46,13 +46,17 @@ public class LukeFtpServer {
             }
             if("-help".equals(args[i])){
                 System.out.println("java -jar lukeftp.jar -u [UserName] -p [PassWord] -port [port] -w [write] -homePath [ftpHomePath] -help [show help] ");
-                return ;
+                return false;
             }
         }
+        return true ;
     }
 
 
     public void ftpStart(String[] args){
+        if(!this.setParams(args)) {
+            return  ;
+        }
         try {
             // 用于创建server
             FtpServerFactory serverFactory = new FtpServerFactory();
