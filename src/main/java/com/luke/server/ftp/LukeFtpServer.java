@@ -32,18 +32,23 @@ public class LukeFtpServer {
             switch (args[i]){
                 case "-u":
                     this.userName = args[i+1] ;
+                    i++ ;
                     break ;
                 case "-p" :
                     this.passWord = args[i+1] ;
+                    i++ ;
                     break ;
                 case "-port" :
                     this.port = Integer.parseInt(args[i+1]) ;
+                    i++ ;
                     break ;
                 case "-w" :
                     this.bWtire = Boolean.parseBoolean(args[i+1]) ;
+                    i++ ;
                     break ;
                 case "-homePath" :
                     this.homePath = args[i+1] ;
+                    i++ ;
                     break ;
                 default:
                     logger.info("java -jar lukeftp.jar -u [UserName] -p [PassWord] -port [port] -w [write] -homePath [ftpHomePath] -help [show help] ");
