@@ -83,6 +83,7 @@ public class LukeFtpServer {
             }
             // 设置PC端登录后可访问的根目录
             user.setHomeDirectory(this.homePath);
+
             // 授予用户写权限
             List<Authority> authorities = new ArrayList<Authority>();
             if(this.bWtire){
@@ -92,6 +93,8 @@ public class LukeFtpServer {
             serverFactory.getUserManager().save(user);
             // 创建并监听网络
             serverFactory.addListener("default", listenerFactory.createListener());
+
+
             // 创建服务
             ftpServer = serverFactory.createServer();
 
