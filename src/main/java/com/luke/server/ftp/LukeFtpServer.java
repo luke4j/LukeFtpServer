@@ -46,7 +46,7 @@ public class LukeFtpServer {
                     this.homePath = args[i+1] ;
                     break ;
                 default:
-                    System.out.println("java -jar lukeftp.jar -u [UserName] -p [PassWord] -port [port] -w [write] -homePath [ftpHomePath] -help [show help] ");
+                    logger.info("java -jar lukeftp.jar -u [UserName] -p [PassWord] -port [port] -w [write] -homePath [ftpHomePath] -help [show help] ");
                     return false ;
             }
         }
