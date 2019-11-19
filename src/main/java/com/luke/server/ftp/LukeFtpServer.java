@@ -54,9 +54,9 @@ public class LukeFtpServer {
     }
 
 
-    public void ftpStart(String[] args){
+    public FtpServer ftpStart(String[] args){
         if(!this.setParams(args)) {
-            return  ;
+            return null  ;
         }
         try {
             // 用于创建server
@@ -92,10 +92,10 @@ public class LukeFtpServer {
 
             // 开启服务
             ftpServer.start();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return ftpServer ;
     }
 
 }
