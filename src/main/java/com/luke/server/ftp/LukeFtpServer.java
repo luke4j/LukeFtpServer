@@ -20,7 +20,7 @@ public class LukeFtpServer {
     private static FtpServer ftpServer = null;
 
     String userName = "anonymous" ;
-    String passWord = null;
+    String passWord = null ;
     int port = 21 ;
     Boolean bWtire = true ;
 
@@ -29,24 +29,24 @@ public class LukeFtpServer {
     private Boolean  setParams(String[] args){
         System.out.println("args is "+args);
         for(int i = 0 ;i<args.length ;i++){
-            if("-u".equals(args[i])){
-                this.userName = args[i+1] ;
-            }
-            if("-p".equals(args[i])){
-                this.passWord = args[i+1] ;
-            }
-            if("-port".equals(args[i])){
-                this.port = Integer.parseInt(args[i+1]) ;
-            }
-            if("-w".equals(args[i])){
-                this.bWtire = Boolean.parseBoolean(args[i+1]) ;
-            }
-            if("-homePath".equals(args[i])){
-                this.homePath = args[i+1] ;
-            }
-            if("-help".equals(args[i])){
-                System.out.println("java -jar lukeftp.jar -u [UserName] -p [PassWord] -port [port] -w [write] -homePath [ftpHomePath] -help [show help] ");
-                return false;
+            switch (args[i]){
+                case "-u":
+                    this.userName = args[i+1] ;
+                    break ;
+                case "-p" :
+                    this.passWord = args[i+1] ;
+                    break ;
+                case "-port" :
+                    this.port = Integer.parseInt(args[i+1]) ;
+                    break ;
+                case "-w" :
+                    this.bWtire = Boolean.parseBoolean(args[i+1]) ;
+                    break ;
+                case "-homePath" :
+                    this.homePath = args[i+1] ;
+                    break ;
+                default:
+                    return false ;
             }
         }
         return true ;
@@ -75,22 +75,17 @@ public class LukeFtpServer {
             if(this.passWord!=null){
                 user.setPassword(this.passWord);
             }
-//
-
             // 设置PC端登录后可访问的根目录
             user.setHomeDirectory(this.homePath);
-
             // 授予用户写权限
             List<Authority> authorities = new ArrayList<Authority>();
-            authorities.add(new WritePermission());
             if(this.bWtire){
+                authorities.add(new WritePermission());
                 user.setAuthorities(authorities);
             }
             serverFactory.getUserManager().save(user);
-
             // 创建并监听网络
             serverFactory.addListener("default", listenerFactory.createListener());
-
             // 创建服务
             ftpServer = serverFactory.createServer();
 
